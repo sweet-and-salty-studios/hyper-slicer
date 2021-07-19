@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HyperSlicer.Utilities.MeshSlicing;
 using HyperSlicer.Behaviours;
+using HyperSlicer.Managers;
 
 namespace HyperSlicer.Controllers
 {
@@ -43,6 +44,8 @@ namespace HyperSlicer.Controllers
         private void Die()
         {
             gameObject.SetActive(false);
+
+            GameManager.Instance.LoadCurrentScene();
         }
 
         private void SliceObject(GameObject sliceableGameObject)

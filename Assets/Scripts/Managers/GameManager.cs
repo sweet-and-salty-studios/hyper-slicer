@@ -1,10 +1,13 @@
 ﻿using HyperSlicer.Controllers;
+using HyperSlicer.Utilities.Helpers;
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace HyperSlicer.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : Singelton<GameManager>
     {
         [SerializeField] private SawController sawController = default;
         [SerializeField] private HelixTowerController helixTowerController = default;
@@ -45,6 +48,18 @@ namespace HyperSlicer.Managers
             {
                 sawController.AntiGravity.Deactivate();
             }
+        }
+
+        public void LoadCurrentScene()
+        {
+            StartCoroutine(ILoadCurrentScene());
+        }
+
+        private IEnumerator ILoadCurrentScene()
+        {
+            yield return new WaitForSeconds(2);
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
