@@ -1,17 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace HyperSlicer.Controllers
 {
     public class HelixTowerController : MonoBehaviour
     {
-        private void Update()
+        [SerializeField] private Transform helixFloorsContainer = default;
+        [SerializeField] private float rotationSpeed = default;
+
+        public void Rotate(float x, float y, float v3)
         {
-
-        }
-
-        private void FixedUpdate()
-        {
-
+            helixFloorsContainer.Rotate(x, y * rotationSpeed * Time.deltaTime, v3);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace HyperSlicer.UI 
+namespace HyperSlicer.UI
 {
     public class AntiGravityDisplay : MonoBehaviour
     {

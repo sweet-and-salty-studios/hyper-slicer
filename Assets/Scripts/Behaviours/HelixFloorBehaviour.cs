@@ -5,11 +5,12 @@ namespace HyperSlicer.Behaviours
 {
     public class HelixFloorBehaviour : MonoBehaviour
     {
-        private readonly List<PieceBehaviour> pieces = new List<PieceBehaviour>();
+        protected readonly List<PieceBehaviour> pieces = new List<PieceBehaviour>();
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            pieces.AddRange(GetComponentsInChildren<PieceBehaviour>());
+            var foo = GetComponentsInChildren<PieceBehaviour>();
+            pieces.AddRange(foo);
         }
 
         protected virtual void Start()

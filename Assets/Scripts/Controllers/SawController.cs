@@ -28,6 +28,7 @@ namespace HyperSlicer.Controllers
             switch(other.gameObject.layer)
             {
                 case 8: Die(); break;
+                case 10: GetBonus(other.GetComponent<ComboPieceBehaviour>()); break;
                 default: break;
             }
         }
@@ -46,6 +47,16 @@ namespace HyperSlicer.Controllers
             gameObject.SetActive(false);
 
             GameManager.Instance.LoadCurrentScene();
+        }
+
+        private void GetBonus(ComboPieceBehaviour comboPiece)
+        {
+            if(comboPiece == null) return;
+
+            AntiGravity.Shutdown();
+
+            Debug.Log("SCORE MULTIPLIER: " + comboPiece.ScoreMultiplier);
+            Debug.Log("VICTORY!");
         }
 
         private void SliceObject(GameObject sliceableGameObject)

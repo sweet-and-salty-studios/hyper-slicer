@@ -25,15 +25,7 @@ namespace HyperSlicer.Behaviours
         {
             Initialize();
         }
-
-        private void Initialize()
-        {
-            currentEnergy = maxEnergy;
-            rb.useGravity = false;
-            antiGravityCanvas.gameObject.SetActive(false);
-            isActive = false;
-        }
-
+     
         private void Update()
         {
             if(isActive == false) 
@@ -51,9 +43,24 @@ namespace HyperSlicer.Behaviours
             antiGravityDisplay.UpdateProgress(maxEnergy, currentEnergy);
         }
 
+        private void Initialize()
+        {
+            currentEnergy = maxEnergy;
+
+            Shutdown();
+        }
+
         private void ModifyEnergy(float amount)
         {
             currentEnergy = Mathf.Clamp(currentEnergy += amount, 0, maxEnergy);
+        }
+
+        public void Shutdown()
+        {
+            rb.velocity = Vector3.zero;
+            rb.useGravity = false;
+            antiGravityCanvas.gameObject.SetActive(false);
+            isActive = false;
         }
 
         public void Deactivate()

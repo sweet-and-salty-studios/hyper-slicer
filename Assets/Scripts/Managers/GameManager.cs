@@ -1,6 +1,5 @@
 ﻿using HyperSlicer.Controllers;
 using HyperSlicer.Utilities.Helpers;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,9 +10,7 @@ namespace HyperSlicer.Managers
     {
         [SerializeField] private SawController sawController = default;
         [SerializeField] private HelixTowerController helixTowerController = default;
-        [SerializeField] private float rotationSpeed = default;
         private bool isGameRunning = default;
-        private readonly string horizontalMouseAxis = "Mouse X";
 
         private IEnumerator IStart()
         {
@@ -34,20 +31,22 @@ namespace HyperSlicer.Managers
         {
             if(isGameRunning == false) return;
 
-            if(Input.GetMouseButtonDown(0))
+            if(InputManager.Instance.IsTouchDown)
             {
                 sawController.AntiGravity.Activate();
             }
 
-            if(Input.GetMouseButton(0))
+            if(InputManager.Instance.IsTouchHeld)
             {
-                helixTowerController.transform.Rotate(0, Input.GetAxisRaw(horizontalMouseAxis) * rotationSpeed * Time.deltaTime, 0);
+                helixTowerController.Rotate(0, InputManager.Instance.HorizontalSwipeAxisRaw, 0);
             }
 
-            if(Input.GetMouseButtonUp(0))
+            if(InputManager.Instance.IsTouchUp)
             {
                 sawController.AntiGravity.Deactivate();
             }
+
+            //UIManager.Instance.ControlPanel
         }
 
         public void LoadCurrentScene()
