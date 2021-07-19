@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilities.MeshSlicing
+namespace HyperSlicer.Utilities.MeshSlicing
 {
     public sealed class Slicer
     {

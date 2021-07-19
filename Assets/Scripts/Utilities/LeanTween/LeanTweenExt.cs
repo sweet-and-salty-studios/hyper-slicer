@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace Utilities.LeanTween
+namespace HyperSlicer.Utilities.LeanTween
 {
     public static class LeanTweenExt
     {

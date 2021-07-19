@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilities.MeshSlicing
+namespace HyperSlicer.Utilities.MeshSlicing
 {
     /**
      * Contains static functionality for performing Triangulation on arbitrary vertices.

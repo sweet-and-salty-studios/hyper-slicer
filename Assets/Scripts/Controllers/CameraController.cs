@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Tower.Controllers
+namespace HyperSlicer.Controllers
 {
     [RequireComponent(typeof(Camera))]
     public class CameraController : MonoBehaviour
     {
         [SerializeField] private Transform target = default;
-        [SerializeField] private float movementSpeedMultiplier = default;
         [SerializeField] private float smoothTime = default;
 
         private Vector3 currentPosition = default;
@@ -18,7 +17,7 @@ namespace Tower.Controllers
         {
             zOffset = transform.position.z;
         }
-        
+
         private void Update()
         {
             currentPosition = new Vector3(transform.position.x, transform.position.y, zOffset);

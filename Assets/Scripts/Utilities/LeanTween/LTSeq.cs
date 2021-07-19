@@ -17,7 +17,7 @@
 * @class LTSeq
 * @constructor
 */
-namespace Utilities.LeanTween
+namespace HyperSlicer.Utilities.LeanTween
 {
     public class LTSeq
     {

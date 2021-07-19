@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Utilities.LeanTween
+namespace HyperSlicer.Utilities.LeanTween
 {
     public class LeanTester : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities.MeshSlicing
+namespace HyperSlicer.Utilities.MeshSlicing
 {
     /**
      * Represents a simple 3D Triangle structure with position

@@ -1,8 +1,7 @@
-
 using UnityEngine;
-namespace Utilities.LeanTween
-{
 
+namespace HyperSlicer.Utilities.LeanTween
+{
     public class LeanAudioStream
     {
 

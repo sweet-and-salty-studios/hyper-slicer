@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities.MeshSlicing
+namespace HyperSlicer.Utilities.MeshSlicing
 {
     /**
      * TextureRegion defines a region of a specific texture which can be used

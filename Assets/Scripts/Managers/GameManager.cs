@@ -1,27 +1,39 @@
-﻿using Tower.Controllers;
+﻿using HyperSlicer.Controllers;
+using System.Collections;
 using UnityEngine;
 
-namespace Tower.Managers
+namespace HyperSlicer.Managers
 {
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private SawController sawController = default;
         [SerializeField] private HelixTowerController helixTowerController = default;
         [SerializeField] private float rotationSpeed = default;
+        private bool isGameRunning = default;
         private readonly string horizontalMouseAxis = "Mouse X";
 
-        private void Start()
+        private IEnumerator IStart()
         {
 #if UNITY_EDITOR
             Cursor.lockState = CursorLockMode.Locked;
 #endif
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+            isGameRunning = true;
+        }
+
+        private void Start()
+        {
+            StartCoroutine(IStart());
         }
 
         private void Update()
         {
+            if(isGameRunning == false) return;
+
             if(Input.GetMouseButtonDown(0))
             {
-                sawController.Deactivate();
+                sawController.AntiGravity.Activate();
             }
 
             if(Input.GetMouseButton(0))
@@ -31,7 +43,7 @@ namespace Tower.Managers
 
             if(Input.GetMouseButtonUp(0))
             {
-                sawController.Activate();
+                sawController.AntiGravity.Deactivate();
             }
         }
     }

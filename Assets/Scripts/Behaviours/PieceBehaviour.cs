@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tower.Behaviours
+namespace HyperSlicer.Behaviours
 {
     public class PieceBehaviour : MonoBehaviour
     {

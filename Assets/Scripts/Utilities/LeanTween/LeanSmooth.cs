@@ -9,7 +9,7 @@
 *
 * @class LeanSmooth
 */
-namespace Utilities.LeanTween
+namespace HyperSlicer.Utilities.LeanTween
 {
 
     public class LeanSmooth

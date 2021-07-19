@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NinjaSlicer.Utilities.Helpers
+namespace HyperSlicer.Utilities.Helpers
 {
     public abstract class Singelton<T> : MonoBehaviour where T : Component
     {

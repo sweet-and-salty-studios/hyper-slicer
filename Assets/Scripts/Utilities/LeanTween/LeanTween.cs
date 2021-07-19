@@ -144,7 +144,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace Utilities.LeanTween
+namespace HyperSlicer.Utilities.LeanTween
 {
 
     public enum TweenAction

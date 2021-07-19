@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tower.Controllers
+namespace HyperSlicer.Controllers
 {
     public class HelixTowerController : MonoBehaviour
     {

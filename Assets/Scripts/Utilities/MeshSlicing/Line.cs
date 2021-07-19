@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities.MeshSlicing
+namespace HyperSlicer.Utilities.MeshSlicing
 {
     public struct Line
     {

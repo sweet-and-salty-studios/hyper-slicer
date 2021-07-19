@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utilities.MeshSlicing
+namespace HyperSlicer.Utilities.MeshSlicing
 {
     /**
      * Define Extension methods for easy access to slicer functionality

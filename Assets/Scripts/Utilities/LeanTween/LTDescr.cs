@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Utilities.LeanTween
+namespace HyperSlicer.Utilities.LeanTween
 {
     /**
     * Internal Representation of a Tween<br>

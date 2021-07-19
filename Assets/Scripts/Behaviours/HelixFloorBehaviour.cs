@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Tower.Behaviours;
 using UnityEngine;
 
-namespace Tower.Controllers
+namespace HyperSlicer.Behaviours
 {
-    public class HelixFloorController : MonoBehaviour
+    public class HelixFloorBehaviour : MonoBehaviour
     {
         private readonly List<PieceBehaviour> pieces = new List<PieceBehaviour>();
 
@@ -13,9 +12,14 @@ namespace Tower.Controllers
             pieces.AddRange(GetComponentsInChildren<PieceBehaviour>());
         }
 
-        private void Start()
+        protected virtual void Start()
         {
-            for(var i = 0; i < Random.Range(1, 4); i++)
+            RemovePieces(Random.Range(1, 4));
+        }
+
+        protected void RemovePieces(int amount)
+        {
+            for(var i = 0; i < amount; i++)
             {
                 var piece = pieces[i];
                 piece.gameObject.SetActive(false);
@@ -23,5 +27,4 @@ namespace Tower.Controllers
             }
         }
     }
-
 }
