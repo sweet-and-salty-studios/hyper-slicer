@@ -132,6 +132,13 @@ namespace HyperSlicer.Managers
             ScoreModified?.Invoke(score);
         }
 
+        public static void MultipliedScore(int multiplier)
+        {
+            score *= multiplier;
+
+            ScoreModified?.Invoke(score);
+        }
+
         public void CalculateLevelDistance()
         {
             currentLevelDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;

@@ -1,12 +1,23 @@
 ﻿using HyperSlicer.Managers;
+using System;
 using UnityEngine;
 
 namespace HyperSlicer.Behaviours
 {
+    [Serializable]
+    public class HelixEndPieceInfo
+    {
+        [SerializeField] private int scoreMultiplier = default;
+        [SerializeField] private Color activeColor = default;
+
+        public int ScoreMultiplier { get => scoreMultiplier; }
+        public Color ActiveColor { get => activeColor; }
+    }
+
     public class HelixFloorEndBehaviour : HelixFloorBehaviour
     {
         [SerializeField] private RotationBehaviour rotationBehaviour = default;
-        [SerializeField] private int[] scoreMultipliers = new int[8];
+        [SerializeField] private HelixEndPieceInfo[] pieceInfos = new HelixEndPieceInfo[8];
 
         protected override void Awake()
         {
@@ -35,7 +46,7 @@ namespace HyperSlicer.Behaviours
             for(int i = 0; i < pieces.Count; i++)
             {
                 var temp = pieces[i];
-                var randomIndex = Random.Range(i, pieces.Count);
+                var randomIndex = UnityEngine.Random.Range(i, pieces.Count);
                 pieces[i] = pieces[randomIndex];
                 pieces[randomIndex] = temp;
             }
@@ -46,7 +57,8 @@ namespace HyperSlicer.Behaviours
                 if(comboPiece == null)
                     continue;
 
-                comboPiece.UpdateScoreMultiplierText(scoreMultipliers[i]);
+                comboPiece.UpdateScoreMultiplierText(pieceInfos[i].ScoreMultiplier);
+                comboPiece.UpdateColors(pieceInfos[i].ActiveColor);
             }
         }
 

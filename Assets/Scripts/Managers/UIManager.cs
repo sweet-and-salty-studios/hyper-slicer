@@ -1,4 +1,6 @@
 ﻿using HyperSlicer.UI;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace HyperSlicer.Managers
@@ -25,14 +27,23 @@ namespace HyperSlicer.Managers
             GameManager.LevelProgressUpdated -= OnLevelProgressUpdated;
         }
 
+        private IEnumerator IDelayAction(Action action)
+        {
+            yield return new WaitForSeconds(4);
+
+            if(action!= null) action.Invoke();
+        }
+
         private void OnGameOver()
         {
-            gameOverPanel.gameObject.SetActive(true);
+            Debug.LogWarning("OnGameOver");
+            StartCoroutine(IDelayAction(() => gameOverPanel.gameObject.SetActive(true)));
         }
 
         private void OnLevelComplete()
         {
-            levelCompletePanel.gameObject.SetActive(true);
+            Debug.LogWarning("OnLevelComplete");
+            StartCoroutine(IDelayAction(() => levelCompletePanel.gameObject.SetActive(true)));
         }
 
         private void OnScoreModified(int newScore)

@@ -1855,11 +1855,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 566729773}
   m_FillRect: {fileID: 837826123}
   m_HandleRect: {fileID: 566729772}
-  m_Direction: 0
+  m_Direction: 1
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2041,7 +2041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c36c18761898f449b0dc021f17ef50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugDirection: {fileID: 0}
   sawController: {fileID: 1082495587}
   helixTowerController: {fileID: 1568757797}
 --- !u!1 &1264125898
@@ -2354,7 +2353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 2.5, y: 0.00007724762}
+  m_AnchoredPosition: {x: -2.5, y: 0.00007724762}
   m_SizeDelta: {x: -4.9999695, y: 24.99989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1434515325
@@ -2694,6 +2693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationBehaviour: {fileID: 113364815}
+  helixFloors: []
 --- !u!1 &1579756302
 GameObject:
   m_ObjectHideFlags: 0

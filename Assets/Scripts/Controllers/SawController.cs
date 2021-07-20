@@ -2,6 +2,8 @@
 using HyperSlicer.Utilities.MeshSlicing;
 using HyperSlicer.Behaviours;
 using HyperSlicer.Managers;
+using System;
+using System.Collections;
 
 namespace HyperSlicer.Controllers
 {
@@ -51,9 +53,15 @@ namespace HyperSlicer.Controllers
                     var comboPiece = other.GetComponent<ComboPieceBehaviour>();
                     if(comboPiece == null)
                         return;
+
+                    comboPiece.AniamateColor();
+
                     transform.position = other.ClosestPointOnBounds(transform.position);
 
+                    GameManager.MultipliedScore(comboPiece.ScoreMultiplier);
+
                     GameManager.CompleteLevel();
+
                     break;
                 default:
                     break;
