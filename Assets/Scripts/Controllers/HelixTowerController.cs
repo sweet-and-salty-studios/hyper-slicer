@@ -1,16 +1,35 @@
-﻿using System;
+﻿using HyperSlicer.Behaviours;
+using HyperSlicer.Managers;
 using UnityEngine;
 
 namespace HyperSlicer.Controllers
 {
     public class HelixTowerController : MonoBehaviour
     {
-        [SerializeField] private Transform helixFloorsContainer = default;
-        [SerializeField] private float rotationSpeed = default;
+        [SerializeField] private RotationBehaviour rotationBehaviour = default;
 
-        public void Rotate(float x, float y, float v3)
+        public RotationBehaviour RotationBehaviour { get => rotationBehaviour; }
+
+        private void Awake()
         {
-            helixFloorsContainer.Rotate(x, y * rotationSpeed * Time.deltaTime, v3);
+            GameManager.GameOver += OnGameOver;
+            GameManager.LevelComplete += OnLevelComplete;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.GameOver -= OnGameOver;
+            GameManager.LevelComplete -= OnLevelComplete;
+        }
+
+        private void OnGameOver()
+        {
+            Destroy(this);
+        }
+
+        private void OnLevelComplete()
+        {
+            Destroy(this);
         }
     }
 }

@@ -1254,6 +1254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4011771479494153840}
   - component: {fileID: 4016440406636813931}
+  - component: {fileID: 979252182}
   m_Layer: 10
   m_Name: HelixFloorEnd
   m_TagString: Untagged
@@ -1295,7 +1296,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84f2010cbad9024086c47044c6268c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationBehaviour: {fileID: 979252182}
   scoreMultipliers: 00000000000000000000000000000000640000002c01000058020000e8030000
+--- !u!114 &979252182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4011771479494153843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1705caa6d92e1794fbce40b9d1ed1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
 --- !u!1 &4011771479511636100
 GameObject:
   m_ObjectHideFlags: 0

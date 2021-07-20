@@ -1,9 +1,13 @@
-﻿using HyperSlicer.UI;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ControlPanel : MonoBehaviour
+namespace HyperSlicer.UI
 {
-    [SerializeField] private LevelProgressDisplay levelProgressDisplay = default;
+    public class ControlPanel : MonoBehaviour
+    {
+        [SerializeField] private ScoreDisplay scoreDisplay = default;
+        [SerializeField] private LevelProgressDisplay levelProgressDisplay = default;
 
-    public LevelProgressDisplay LevelProgressDisplay { get => levelProgressDisplay; }
+        public ScoreDisplay ScoreDisplay { get => scoreDisplay; }
+        public LevelProgressDisplay LevelProgressDisplay { get => levelProgressDisplay; }
+    }
 }

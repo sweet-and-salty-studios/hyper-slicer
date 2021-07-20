@@ -8,28 +8,55 @@ namespace HyperSlicer.Controllers
     public class SawController : MonoBehaviour
     {
         [SerializeField] private Material crossSectionMaterial = default;
-        [SerializeField] private float rotateSpeedMultiplier = default;
-        [SerializeField] private Transform modelTransform = default;
-        
+        [SerializeField] private RotationBehaviour rotationBehaviour = default;
+
         public AntiGravityBehaviour AntiGravity { get; private set; } = default;
 
         private void Awake()
         {
             AntiGravity = GetComponent<AntiGravityBehaviour>();
+
+            GameManager.GameOver += OnGameOver;
+            GameManager.LevelComplete += OnLevelComplete;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.GameOver -= OnGameOver;
+            GameManager.LevelComplete -= OnLevelComplete;
+        }
+
+        private void OnGameOver()
+        {
+            gameObject.SetActive(false);
+        }
+        private void OnLevelComplete()
+        {
+            AntiGravity.Shutdown();
         }
 
         private void Update()
         {
-            modelTransform.Rotate(Vector3.up * rotateSpeedMultiplier);
+            rotationBehaviour.Rotate(Vector3.up);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             switch(other.gameObject.layer)
             {
-                case 8: Die(); break;
-                case 10: GetBonus(other.GetComponent<ComboPieceBehaviour>()); break;
-                default: break;
+                case 8:
+                    GameManager.EndGame();
+                    break;
+                case 10:
+                    var comboPiece = other.GetComponent<ComboPieceBehaviour>();
+                    if(comboPiece == null)
+                        return;
+                    transform.position = other.ClosestPointOnBounds(transform.position);
+
+                    GameManager.CompleteLevel();
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -37,26 +64,13 @@ namespace HyperSlicer.Controllers
         {
             switch(other.gameObject.layer)
             {
-                case 9: SliceObject(other.gameObject); break;
-                default: break;
+                case 9:
+                    GameManager.ModifiyScore(1);
+                    SliceObject(other.gameObject);
+                    break;
+                default:
+                    break;
             }
-        }
-
-        private void Die()
-        {
-            gameObject.SetActive(false);
-
-            GameManager.Instance.LoadCurrentScene();
-        }
-
-        private void GetBonus(ComboPieceBehaviour comboPiece)
-        {
-            if(comboPiece == null) return;
-
-            AntiGravity.Shutdown();
-
-            Debug.Log("SCORE MULTIPLIER: " + comboPiece.ScoreMultiplier);
-            Debug.Log("VICTORY!");
         }
 
         private void SliceObject(GameObject sliceableGameObject)

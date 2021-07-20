@@ -1,25 +1,36 @@
 ﻿using HyperSlicer.Controllers;
-using HyperSlicer.Utilities.Helpers;
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace HyperSlicer.Managers
 {
-    public class GameManager : Singelton<GameManager>
+    public class GameManager : MonoBehaviour
     {
         [SerializeField] private SawController sawController = default;
         [SerializeField] private HelixTowerController helixTowerController = default;
         private bool isGameRunning = default;
 
-        private IEnumerator IStart()
-        {
-#if UNITY_EDITOR
-            Cursor.lockState = CursorLockMode.Locked;
-#endif
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        public static event Action GameOver = default;
+        public static event Action LevelComplete = default;
+        public static event Action<int> ModifyScore = default;
+        private static int score = default;
 
-            isGameRunning = true;
+        private void Awake()
+        {
+            GameOver += OnGameOver;
+            LevelComplete += OnGameOver;
+        }
+
+        private void OnGameOver()
+        {
+            isGameRunning = false;
+        }
+
+        private void OnDestroy()
+        {
+            GameOver -= OnGameOver;
+            LevelComplete -= OnGameOver;
         }
 
         private void Start()
@@ -29,36 +40,89 @@ namespace HyperSlicer.Managers
 
         private void Update()
         {
-            if(isGameRunning == false) return;
+            if(isGameRunning == false)
+                return;
 
-            if(InputManager.Instance.IsTouchDown)
-            {
-                sawController.AntiGravity.Activate();
-            }
+#if UNITY_EDITOR
+            MouseControl();
+#else
+            TouuchControls();
+#endif
 
-            if(InputManager.Instance.IsTouchHeld)
-            {
-                helixTowerController.Rotate(0, InputManager.Instance.HorizontalSwipeAxisRaw, 0);
-            }
-
-            if(InputManager.Instance.IsTouchUp)
-            {
-                sawController.AntiGravity.Deactivate();
-            }
-
-            //UIManager.Instance.ControlPanel
         }
 
-        public void LoadCurrentScene()
+#if UNITY_EDITOR
+        private void MouseControl()
         {
-            StartCoroutine(ILoadCurrentScene());
+            if(InputManager.IsTouchDown)
+            {
+                if(sawController != null)
+                    sawController.AntiGravity.Activate();
+            }
+
+
+            if(InputManager.IsTouchHeld)
+            {
+                //helixTowerController.RotationBehaviour.Rotate(Vector3.up * Input.GetAxisRaw("Horizontal"));
+                //    return;
+                if(helixTowerController == null)
+                    return;
+                helixTowerController.RotationBehaviour.Rotate(Vector3.up * InputManager.HorizontalSwipeAxisRaw);
+            }
+
+            if(InputManager.IsTouchUp)
+            {
+                if(sawController != null)
+                    sawController.AntiGravity.Deactivate();
+            }
+        }
+#else
+        private void TouuchControls()
+        {
+            var currentTouch = Input.GetTouch(0);
+            switch(currentTouch.phase)
+            {
+                case TouchPhase.Began:
+                    if(sawController != null)
+                        sawController.AntiGravity.Activate();
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    if(helixTowerController != null)
+                        helixTowerController.RotationBehaviour.Rotate(Vector3.up * InputManager.HorizontalSwipeAxisRaw);
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if(sawController != null)
+                        sawController.AntiGravity.Deactivate();
+                    break;
+                default:
+                    break;
+            }
+        }
+#endif
+
+        private IEnumerator IStart()
+        {
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            isGameRunning = true;
         }
 
-        private IEnumerator ILoadCurrentScene()
+        public static void CompleteLevel()
         {
-            yield return new WaitForSeconds(2);
+            LevelComplete?.Invoke();
+        }
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        public static void EndGame()
+        {
+            GameOver?.Invoke();
+        }
+
+        public static void ModifiyScore(int amount)
+        {
+            score += amount;
+
+            ModifyScore?.Invoke(score);
         }
     }
 }

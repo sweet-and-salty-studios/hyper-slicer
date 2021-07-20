@@ -1,15 +1,14 @@
-﻿using HyperSlicer.Utilities.Helpers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HyperSlicer.Managers
 {
-    public class InputManager : Singelton<InputManager>
+    public class InputManager : MonoBehaviour
     {
-        private readonly string horizontalMouseAxis = "Mouse X";
+        private readonly static string horizontalMouseAxis = "Mouse X";
 
-        public bool IsTouchDown { get => Input.GetMouseButtonDown(0); }
-        public bool IsTouchHeld { get => Input.GetMouseButton(0); }
-        public bool IsTouchUp { get => Input.GetMouseButtonUp(0); }
-        public float HorizontalSwipeAxisRaw { get => Input.GetAxisRaw(horizontalMouseAxis); }
+        public static bool IsTouchDown { get => Input.GetMouseButtonDown(0); }
+        public static bool IsTouchHeld { get => Input.GetMouseButton(0); }
+        public static bool IsTouchUp { get => Input.GetMouseButtonUp(0); }
+        public static float HorizontalSwipeAxisRaw { get => Input.GetAxisRaw(horizontalMouseAxis); }
     }
 }

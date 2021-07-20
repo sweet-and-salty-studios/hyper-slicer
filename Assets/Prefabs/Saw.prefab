@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 1082495587}
   - component: {fileID: 5374880274235382254}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,8 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossSectionMaterial: {fileID: 0}
-  rotateSpeedMultiplier: 60
-  modelTransform: {fileID: 8692475750025688598}
+  collider: {fileID: 1279009877}
+  rotationBehaviour: {fileID: 858525103}
 --- !u!114 &5374880274235382254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +392,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6440714149456191475, guid: 693499a9ddd4dca46b194ffd3f9b1d6e, type: 3}
+--- !u!114 &858525103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8352541301107469484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1705caa6d92e1794fbce40b9d1ed1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 60
 --- !u!1001 &9163516679723356669
 PrefabInstance:
   m_ObjectHideFlags: 0

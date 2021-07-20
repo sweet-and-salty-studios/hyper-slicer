@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HyperSlicer.Behaviours
 {
-    public class ComboPieceBehaviour : MonoBehaviour
+    public class ComboPieceBehaviour : PieceBehaviour
     {
         private TMP_Text scoreMultiplierText = default;
 

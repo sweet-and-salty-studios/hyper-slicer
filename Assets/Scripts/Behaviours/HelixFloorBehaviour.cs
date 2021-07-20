@@ -9,8 +9,7 @@ namespace HyperSlicer.Behaviours
 
         protected virtual void Awake()
         {
-            var foo = GetComponentsInChildren<PieceBehaviour>();
-            pieces.AddRange(foo);
+            pieces.AddRange(GetComponentsInChildren<PieceBehaviour>());
         }
 
         protected virtual void Start()

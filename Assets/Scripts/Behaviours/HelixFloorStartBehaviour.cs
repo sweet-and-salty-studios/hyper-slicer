@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-namespace HyperSlicer.Behaviours
+﻿namespace HyperSlicer.Behaviours
 {
     public class HelixFloorStartBehaviour : HelixFloorBehaviour
     {
         protected override void Start()
         {
-            RemovePieces(1);
+            RemovePieces(3);
         }
     }
 }

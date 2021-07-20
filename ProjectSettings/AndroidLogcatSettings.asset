@@ -1,30 +1,48 @@
 {
     "m_SelectedDeviceId": "42000f60c6bc7575",
     "m_SelectedPackage": {
-        "deviceId": "42000f60c6bc7575",
-        "name": "com.SweetSaltyStudios.HyperSlicer",
-        "processId": 20649,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "42000f60c6bc7575",
-            "name": "com.SweetSaltyStudios.HyperSlicer",
-            "processId": 11757,
+            "name": "com.sec.android.app.launcher",
+            "processId": 4490,
+            "exited": false
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.unity3d.genericremote",
+            "processId": 9803,
             "exited": true
         },
         {
             "deviceId": "42000f60c6bc7575",
-            "name": "com.google.android.youtube",
-            "processId": 17161,
-            "exited": false
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 13487,
+            "exited": true
         },
         {
             "deviceId": "42000f60c6bc7575",
             "name": "com.SweetSaltyStudios.HyperSlicer",
-            "processId": 20649,
-            "exited": false
+            "processId": 15865,
+            "exited": true
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 18902,
+            "exited": true
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 21108,
+            "exited": true
         }
     ],
     "m_Tags": {
