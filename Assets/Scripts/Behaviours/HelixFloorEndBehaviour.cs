@@ -27,10 +27,24 @@ namespace HyperSlicer.Behaviours
 
         protected override void Start()
         {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            for(int i = 0; i < pieces.Count; i++)
+            {
+                var temp = pieces[i];
+                var randomIndex = Random.Range(i, pieces.Count);
+                pieces[i] = pieces[randomIndex];
+                pieces[randomIndex] = temp;
+            }
+
             for(var i = 0; i < pieces.Count; i++)
             {
                 var comboPiece = pieces[i] as ComboPieceBehaviour;
-                if(comboPiece == null) continue;
+                if(comboPiece == null)
+                    continue;
 
                 comboPiece.UpdateScoreMultiplierText(scoreMultipliers[i]);
             }

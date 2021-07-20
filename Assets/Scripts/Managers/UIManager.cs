@@ -13,29 +13,36 @@ namespace HyperSlicer.Managers
         {
             GameManager.GameOver += OnGameOver;
             GameManager.LevelComplete += OnLevelComplete;
-            GameManager.ModifyScore += OnScoreModified;
+            GameManager.ScoreModified += OnScoreModified;
+            GameManager.LevelProgressUpdated += OnLevelProgressUpdated;
         }
 
         private void OnDestroy()
         {
             GameManager.GameOver -= OnGameOver;
             GameManager.LevelComplete -= OnLevelComplete;
-            GameManager.ModifyScore -= OnScoreModified;
+            GameManager.ScoreModified -= OnScoreModified;
+            GameManager.LevelProgressUpdated -= OnLevelProgressUpdated;
         }
 
-        public void OnGameOver()
+        private void OnGameOver()
         {
             gameOverPanel.gameObject.SetActive(true);
         }
 
-        public void OnLevelComplete()
+        private void OnLevelComplete()
         {
             levelCompletePanel.gameObject.SetActive(true);
         }
 
-        public void OnScoreModified(int newScore)
+        private void OnScoreModified(int newScore)
         {
             controlPanel.ScoreDisplay.UpdateScoreText(newScore);
+        }
+
+        private void OnLevelProgressUpdated(float maxDistance, float currentDistance)
+        {
+            controlPanel.LevelProgressDisplay.UpdateProgress(maxDistance, currentDistance);
         }
     }
 }

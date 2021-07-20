@@ -13,18 +13,17 @@ namespace HyperSlicer.Managers
 
         public static event Action GameOver = default;
         public static event Action LevelComplete = default;
-        public static event Action<int> ModifyScore = default;
+        public static event Action<int> ScoreModified = default;
+        public static event Action<float, float> LevelProgressUpdated = default;
+
         private static int score = default;
+        private float currentLevelDistance = default;
+        private float startLevelDistance = default;
 
         private void Awake()
         {
             GameOver += OnGameOver;
             LevelComplete += OnGameOver;
-        }
-
-        private void OnGameOver()
-        {
-            isGameRunning = false;
         }
 
         private void OnDestroy()
@@ -35,6 +34,9 @@ namespace HyperSlicer.Managers
 
         private void Start()
         {
+            currentLevelDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
+            startLevelDistance = currentLevelDistance;
+
             StartCoroutine(IStart());
         }
 
@@ -48,7 +50,7 @@ namespace HyperSlicer.Managers
 #else
             TouuchControls();
 #endif
-
+            CalculateLevelDistance();
         }
 
 #if UNITY_EDITOR
@@ -76,6 +78,7 @@ namespace HyperSlicer.Managers
                     sawController.AntiGravity.Deactivate();
             }
         }
+
 #else
         private void TouuchControls()
         {
@@ -101,6 +104,10 @@ namespace HyperSlicer.Managers
             }
         }
 #endif
+        private void OnGameOver()
+        {
+            isGameRunning = false;
+        }
 
         private IEnumerator IStart()
         {
@@ -118,11 +125,18 @@ namespace HyperSlicer.Managers
             GameOver?.Invoke();
         }
 
-        public static void ModifiyScore(int amount)
+        public static void ModifyScore(int amount)
         {
             score += amount;
 
-            ModifyScore?.Invoke(score);
+            ScoreModified?.Invoke(score);
+        }
+
+        public void CalculateLevelDistance()
+        {
+            currentLevelDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
+
+            LevelProgressUpdated(startLevelDistance, currentLevelDistance);
         }
     }
 }

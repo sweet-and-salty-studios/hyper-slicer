@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using HyperSlicer.Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ namespace HyperSlicer.UI
 
         public void UpdateProgress(float maximum, float current)
         {
-            slider.value = current / maximum;
+            slider.value = Mathf.Clamp01(current / maximum);
         }
     }
 }

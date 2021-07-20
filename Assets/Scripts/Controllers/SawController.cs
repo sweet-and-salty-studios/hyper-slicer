@@ -65,7 +65,7 @@ namespace HyperSlicer.Controllers
             switch(other.gameObject.layer)
             {
                 case 9:
-                    GameManager.ModifiyScore(1);
+                    GameManager.ModifyScore(1);
                     SliceObject(other.gameObject);
                     break;
                 default:
