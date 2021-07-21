@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "42000f60c6bc7575",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "42000f60c6bc7575",
+        "name": "com.SweetSaltyStudios.HyperSlicer",
+        "processId": 30368,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -43,6 +43,12 @@
             "name": "com.SweetSaltyStudios.HyperSlicer",
             "processId": 21108,
             "exited": true
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 30368,
+            "exited": false
         }
     ],
     "m_Tags": {

@@ -10,7 +10,6 @@ namespace HyperSlicer.Behaviours
         {
             if(direction == Vector3.zero) return;
 
-            //transform.rotation = Quaternion.LookRotation(direction * rotationSpeed * Time.deltaTime);
             transform.Rotate(direction * rotationSpeed * Time.deltaTime);
         }
     }

@@ -38,18 +38,7 @@ namespace HyperSlicer.Behaviours
 
         protected override void Start()
         {
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            for(int i = 0; i < pieces.Count; i++)
-            {
-                var temp = pieces[i];
-                var randomIndex = UnityEngine.Random.Range(i, pieces.Count);
-                pieces[i] = pieces[randomIndex];
-                pieces[randomIndex] = temp;
-            }
+            RandomizePieces();
 
             for(var i = 0; i < pieces.Count; i++)
             {

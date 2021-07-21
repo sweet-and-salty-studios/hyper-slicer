@@ -36,13 +36,11 @@ namespace HyperSlicer.Managers
 
         private void OnGameOver()
         {
-            Debug.LogWarning("OnGameOver");
             StartCoroutine(IDelayAction(() => gameOverPanel.gameObject.SetActive(true)));
         }
 
         private void OnLevelComplete()
         {
-            Debug.LogWarning("OnLevelComplete");
             StartCoroutine(IDelayAction(() => levelCompletePanel.gameObject.SetActive(true)));
         }
 

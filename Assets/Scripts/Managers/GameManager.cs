@@ -5,10 +5,22 @@ using UnityEngine;
 
 namespace HyperSlicer.Managers
 {
+    [Serializable]
+    public class LevelInfo
+    {
+        [SerializeField] private int helixCount = default;
+        [SerializeField] [Range(5, 20)] private int helixDistance = default;
+
+        public int HelixCount { get => helixCount; }
+        public int HelixDistance { get => helixDistance; }
+    }
+
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] LevelInfo levelInfo = default;
         [SerializeField] private SawController sawController = default;
         [SerializeField] private HelixTowerController helixTowerController = default;
+
         private bool isGameRunning = default;
 
         public static event Action GameOver = default;
@@ -34,6 +46,8 @@ namespace HyperSlicer.Managers
 
         private void Start()
         {
+            helixTowerController.CreateLevel(levelInfo);
+
             currentLevelDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
             startLevelDistance = currentLevelDistance;
 
@@ -62,14 +76,11 @@ namespace HyperSlicer.Managers
                     sawController.AntiGravity.Activate();
             }
 
-
             if(InputManager.IsTouchHeld)
             {
-                //helixTowerController.RotationBehaviour.Rotate(Vector3.up * Input.GetAxisRaw("Horizontal"));
-                //    return;
                 if(helixTowerController == null)
                     return;
-                helixTowerController.RotationBehaviour.Rotate(Vector3.up * InputManager.HorizontalSwipeAxisRaw);
+                helixTowerController.RotationBehaviour.Rotate(Vector3.up * -InputManager.HorizontalSwipeAxisRaw);
             }
 
             if(InputManager.IsTouchUp)
@@ -78,7 +89,6 @@ namespace HyperSlicer.Managers
                     sawController.AntiGravity.Deactivate();
             }
         }
-
 #else
         private void TouuchControls()
         {
@@ -92,7 +102,7 @@ namespace HyperSlicer.Managers
                 case TouchPhase.Moved:
                 case TouchPhase.Stationary:
                     if(helixTowerController != null)
-                        helixTowerController.RotationBehaviour.Rotate(Vector3.up * InputManager.HorizontalSwipeAxisRaw);
+                        helixTowerController.RotationBehaviour.Rotate(Vector3.up * -InputManager.HorizontalSwipeAxisRaw);
                     break;
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4200647680339549287}
   - component: {fileID: 8628873093852947208}
   m_Layer: 8
-  m_Name: Cylinder
+  m_Name: Column
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d808c165cbc834e96af596c37478f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  middleColumn: {fileID: 2060666253613873707}
 --- !u!1 &2332689459574074280
 GameObject:
   m_ObjectHideFlags: 0

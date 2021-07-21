@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3290320698321062313}
   - component: {fileID: 6943927946863720134}
   m_Layer: 8
-  m_Name: Cylinder
+  m_Name: Column
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +345,8 @@ Transform:
   - {fileID: 4016440407354222652}
   - {fileID: 4016440407774510019}
   - {fileID: 827209855217823717}
-  - {fileID: 6742065514012713465}
+  - {fileID: 1136414020024515528}
+  - {fileID: 3335165852995786326}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -361,6 +362,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222f7392d21f4e5438dd50b92bfdb6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  middleColumn: {fileID: 827209855217823717}
+  slicableSpawnPoints:
+  - {fileID: 1136414020024515528}
+  - {fileID: 3335165852995786326}
 --- !u!1 &4016440407354222653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2ec11428eaad34ab9e24b8e0a872eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4266723770904852592
+--- !u!1 &4828534006108422454
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1011,23 +1016,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6742065514012713465}
+  - component: {fileID: 3335165852995786326}
   m_Layer: 8
-  m_Name: GameObject
+  m_Name: SlicableSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6742065514012713465
+--- !u!4 &3335165852995786326
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4266723770904852592}
+  m_GameObject: {fileID: 4828534006108422454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4016440406685041061}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6301991192846299399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136414020024515528}
+  m_Layer: 8
+  m_Name: SlicableSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1136414020024515528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301991192846299399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4016440406685041061}
