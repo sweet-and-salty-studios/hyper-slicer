@@ -310,6 +310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80a9a5d52c8f9f449ef15a99188e095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffectPrefab: {fileID: 19821056, guid: 079954accd64b32419ec069129c81273, type: 3}
+  sliceEffectPrefab: {fileID: 777349023239957098, guid: 8073ccb95db84204882579c95c62e5fd,
+    type: 3}
   crossSectionMaterial: {fileID: 2100000, guid: f3537057a28ada744a5d3b4182a4b747,
     type: 2}
   rotationBehaviour: {fileID: 858525103}
@@ -472,12 +475,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d79a3a1d7323fd947a7fa746db81b6c2, type: 2}
+      objectReference: {fileID: 2100000, guid: f3537057a28ada744a5d3b4182a4b747, type: 2}
     - target: {fileID: -7511558181221131132, guid: 693499a9ddd4dca46b194ffd3f9b1d6e,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: f3537057a28ada744a5d3b4182a4b747, type: 2}
+      objectReference: {fileID: 2100000, guid: b2ecca0cb2d77724799ebe56ed081ca9, type: 2}
     - target: {fileID: 919132149155446097, guid: 693499a9ddd4dca46b194ffd3f9b1d6e,
         type: 3}
       propertyPath: m_Name

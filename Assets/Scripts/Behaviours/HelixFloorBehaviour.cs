@@ -53,7 +53,7 @@ namespace HyperSlicer.Behaviours
 
                     slicable.transform.localPosition = Vector3.up * lastSlicableY;
 
-                    lastSlicableY = slicable.transform.position.y;
+                    lastSlicableY = slicable.transform.localPosition.y - 2;
                 }
             }
         }

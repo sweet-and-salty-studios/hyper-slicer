@@ -2,13 +2,13 @@
 using HyperSlicer.Utilities.MeshSlicing;
 using HyperSlicer.Behaviours;
 using HyperSlicer.Managers;
-using System;
-using System.Collections;
 
 namespace HyperSlicer.Controllers
 {
     public class SawController : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem deathEffectPrefab = default;
+        [SerializeField] private ParticleSystem sliceEffectPrefab = default;
         [SerializeField] private Material crossSectionMaterial = default;
         [SerializeField] private RotationBehaviour rotationBehaviour = default;
         [SerializeField] private new Collider collider = default;
@@ -48,6 +48,9 @@ namespace HyperSlicer.Controllers
             switch(other.gameObject.layer)
             {
                 case 8:
+
+                    Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+
                     GameManager.EndGame();
                     break;
                 case 10:
@@ -78,6 +81,7 @@ namespace HyperSlicer.Controllers
                 case 9:
                     GameManager.ModifyScore(1);
                     SliceObject(other.gameObject);
+                    Instantiate(sliceEffectPrefab, transform.position, Quaternion.identity);
                     break;
                 default:
                     break;

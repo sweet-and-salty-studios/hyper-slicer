@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "42000f60c6bc7575",
         "name": "com.SweetSaltyStudios.HyperSlicer",
-        "processId": 30368,
+        "processId": 27624,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -48,6 +48,24 @@
             "deviceId": "42000f60c6bc7575",
             "name": "com.SweetSaltyStudios.HyperSlicer",
             "processId": 30368,
+            "exited": false
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 21645,
+            "exited": false
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 25326,
+            "exited": false
+        },
+        {
+            "deviceId": "42000f60c6bc7575",
+            "name": "com.SweetSaltyStudios.HyperSlicer",
+            "processId": 27624,
             "exited": false
         }
     ],

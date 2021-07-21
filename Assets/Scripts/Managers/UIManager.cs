@@ -1,4 +1,5 @@
-﻿using HyperSlicer.UI;
+﻿using HyperSlicer.Controllers;
+using HyperSlicer.UI;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -8,24 +9,26 @@ namespace HyperSlicer.Managers
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private ControlPanel controlPanel = default;
-        [SerializeField] private GameOverPanel gameOverPanel = default;
+        //[SerializeField] private GameOverPanel gameOverPanel = default;
         [SerializeField] private LevelCompletePanel levelCompletePanel = default;
 
         private void Awake()
         {
             GameManager.LevelLoaded += OnLevelLoaded;
-            GameManager.GameOver += OnGameOver;
+            //GameManager.GameOver += OnGameOver;
             GameManager.LevelComplete += OnLevelComplete;
             GameManager.ScoreAdded += OnScoreModified;
+            GameManager.ScoreMultiplied += OnScoreModified; 
             GameManager.LevelProgressUpdated += OnLevelProgressUpdated;
         }
 
         private void OnDestroy()
         {
             GameManager.LevelLoaded -= OnLevelLoaded;
-            GameManager.GameOver -= OnGameOver;
+            //GameManager.GameOver -= OnGameOver;
             GameManager.LevelComplete -= OnLevelComplete;
             GameManager.ScoreAdded -= OnScoreModified;
+            GameManager.ScoreMultiplied -= OnScoreModified;
             GameManager.LevelProgressUpdated -= OnLevelProgressUpdated;
         }
 
@@ -42,14 +45,17 @@ namespace HyperSlicer.Managers
             controlPanel.LevelProgressDisplay.UpdateLevelTexts(currentLevelIndex, currentLevelIndex + 1);
         }
 
-        private void OnGameOver(LevelInfo levelInfo)
-        {
-            StartCoroutine(IDelayAction(() => gameOverPanel.gameObject.SetActive(true)));
-        }
+        //private void OnGameOver(LevelInfo levelInfo)
+        //{
+        //    StartCoroutine(IDelayAction(() => gameOverPanel.gameObject.SetActive(true)));
+        //}
 
         private void OnLevelComplete(LevelInfo levelInfo)
         {
-            StartCoroutine(IDelayAction(() => levelCompletePanel.gameObject.SetActive(true)));
+            StartCoroutine(IDelayAction(() =>
+            {
+                levelCompletePanel.gameObject.SetActive(true);
+            }));
         }
 
         private void OnScoreModified(LevelInfo levelInfo)
@@ -57,9 +63,9 @@ namespace HyperSlicer.Managers
             controlPanel.ScoreDisplay.UpdateScoreText(levelInfo.CurrentScore);
         }
 
-        private void OnLevelProgressUpdated(float maxDistance, float currentDistance)
+        private void OnLevelProgressUpdated(LevelInfo levelInfo)
         {
-            controlPanel.LevelProgressDisplay.UpdateProgress(maxDistance, currentDistance);
+            controlPanel.LevelProgressDisplay.UpdateProgress(levelInfo.StartDistance, levelInfo.CurrentDistance);
         }
     }
 }

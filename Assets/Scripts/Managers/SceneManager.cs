@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace HyperSlicer.Managers
 {
@@ -14,9 +16,17 @@ namespace HyperSlicer.Managers
             GameManager.GameOver -= LoadCurrentScene;
         }
 
+        private IEnumerator IDelayAction(Action action)
+        {
+            yield return new WaitForSeconds(4);
+
+            if(action != null)
+                action.Invoke();
+        }
+
         private void LoadCurrentScene(LevelInfo levelInfo)
         {
-            LoadCurrentScene();
+            StartCoroutine(IDelayAction(() => LoadCurrentScene()));
         }
 
         public void LoadCurrentScene()

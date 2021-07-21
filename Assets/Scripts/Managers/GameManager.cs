@@ -7,8 +7,9 @@ namespace HyperSlicer.Managers
 {
     public class LevelInfo
     {
-        public LevelInfo(int helixDistance = 10, int currentLevelIndex = 1, int score = 0)
+        public LevelInfo(SawController saw, int helixDistance = 10, int currentLevelIndex = 1, int score = 0)
         {
+            Saw = saw;
             HelixDistance = helixDistance;
             CurrentLevelIndex = currentLevelIndex;
             CurrentScore = score;
@@ -16,10 +17,14 @@ namespace HyperSlicer.Managers
             HelixCount = 3 + currentLevelIndex;
         }
         
+        public SawController Saw { get; }
         public int HelixCount { get; }
         public int HelixDistance { get; }
         public int CurrentLevelIndex { get; }
         public int CurrentScore { get; set; }
+        public float StartDistance { get; set; }
+        public float CurrentDistance { get; set; }
+        public bool IsGameRunning { get; set; }
     }
 
     public class GameManager : MonoBehaviour
@@ -27,19 +32,14 @@ namespace HyperSlicer.Managers
         [SerializeField] private SawController sawController = default;
         [SerializeField] private HelixTowerController helixTowerController = default;
 
-        private bool isGameRunning = default;
-
         public static event Action<LevelInfo> LevelLoaded = default;
         public static event Action<LevelInfo> GameOver = default;
         public static event Action<LevelInfo> LevelComplete = default;
         public static event Action<LevelInfo> ScoreAdded = default;
         public static event Action<LevelInfo> ScoreMultiplied = default;
-        public static event Action<float, float> LevelProgressUpdated = default;
+        public static event Action<LevelInfo> LevelProgressUpdated = default;
 
         public static LevelInfo LevelInfo { get; private set; } = default;
-
-        private float currentLevelDistance = default;
-        private float startLevelDistance = default;
 
         private void Awake()
         {
@@ -56,29 +56,32 @@ namespace HyperSlicer.Managers
         private void Start()
         {
             LevelInfo = new LevelInfo(
-                10, 
+                sawController,
+                10,
                 PlayerPrefs.GetInt("Level", 1),
                 PlayerPrefs.GetInt("Score", 0));
+
             LevelLoaded?.Invoke(LevelInfo);
             ScoreAdded?.Invoke(LevelInfo);
 
-            currentLevelDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
-            startLevelDistance = currentLevelDistance;
-
             StartCoroutine(IStart());
+
+            LevelInfo.StartDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
+            LevelInfo.CurrentDistance = LevelInfo.StartDistance;
         }
 
         private void Update()
         {
-            if(isGameRunning == false)
-                return;
+            if(LevelInfo == null) return;
+            if(LevelInfo.IsGameRunning == false) return;
+
+            CalculateLevelDistance(LevelInfo);
 
 #if UNITY_EDITOR
             MouseControl();
 #else
             TouuchControls();
 #endif
-            CalculateLevelDistance();
         }
 
 #if UNITY_EDITOR
@@ -130,18 +133,18 @@ namespace HyperSlicer.Managers
 #endif
         private void OnGameOver(LevelInfo levelInfo)
         {
-            isGameRunning = false;
+            levelInfo.IsGameRunning = false;
         }
 
         private IEnumerator IStart()
         {
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            isGameRunning = true;
+            LevelInfo.IsGameRunning = true;
         }
        
         private void OnLevelComplete(LevelInfo levelInfo)
         {
-            isGameRunning = false;
+            levelInfo.IsGameRunning = false;
             PlayerPrefs.SetInt("Level", levelInfo.CurrentLevelIndex + 1);
             PlayerPrefs.SetInt("Score", levelInfo.CurrentScore);
         }
@@ -165,16 +168,18 @@ namespace HyperSlicer.Managers
 
         public static void MultipliedScore(int multiplier)
         {
+            if(multiplier == 0) multiplier = 1;
+
             LevelInfo.CurrentScore *= multiplier;
 
             ScoreMultiplied?.Invoke(LevelInfo);
         }
 
-        public void CalculateLevelDistance()
+        private void CalculateLevelDistance(LevelInfo levelInfo)
         {
-            currentLevelDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
+            levelInfo.CurrentDistance = (helixTowerController.HelixFloorEnd.transform.position - sawController.transform.position).magnitude;
 
-            LevelProgressUpdated(startLevelDistance, currentLevelDistance);
+            LevelProgressUpdated(levelInfo);
         }
     }
 }
