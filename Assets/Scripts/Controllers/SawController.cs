@@ -11,6 +11,7 @@ namespace HyperSlicer.Controllers
     {
         [SerializeField] private Material crossSectionMaterial = default;
         [SerializeField] private RotationBehaviour rotationBehaviour = default;
+        [SerializeField] private new Collider collider = default;
 
         public AntiGravityBehaviour AntiGravity { get; private set; } = default;
 
@@ -28,11 +29,11 @@ namespace HyperSlicer.Controllers
             GameManager.LevelComplete -= OnLevelComplete;
         }
 
-        private void OnGameOver()
+        private void OnGameOver(LevelInfo levelInfo)
         {
             gameObject.SetActive(false);
         }
-        private void OnLevelComplete()
+        private void OnLevelComplete(LevelInfo levelInfo)
         {
             AntiGravity.Shutdown();
         }
@@ -57,6 +58,8 @@ namespace HyperSlicer.Controllers
                     comboPiece.AniamateColor();
 
                     transform.position = other.ClosestPointOnBounds(transform.position);
+
+                    collider.enabled = false;
 
                     GameManager.MultipliedScore(comboPiece.ScoreMultiplier);
 

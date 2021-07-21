@@ -22,10 +22,32 @@ namespace HyperSlicer.Controllers
 
         private void Awake()
         {
+            GameManager.LevelLoaded += OnLevelLoaded;
             GameManager.GameOver += OnGameOver;
             GameManager.LevelComplete += OnLevelComplete;
 
             HelixFloorEnd = GetComponentInChildren<HelixFloorEndBehaviour>(true);
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.LevelLoaded -= OnLevelLoaded;
+            GameManager.GameOver -= OnGameOver;
+            GameManager.LevelComplete -= OnLevelComplete;
+        }
+
+        private void OnGameOver(LevelInfo levelInfo)
+        {
+            Destroy(this);
+        }
+
+        private void OnLevelComplete(LevelInfo levelInfo)
+        {
+            Destroy(this);
+        }
+        private void OnLevelLoaded(LevelInfo levelInfo)
+        {
+            CreateLevel(levelInfo);
         }
 
         public void CreateLevel(LevelInfo levelInfo)
@@ -47,22 +69,6 @@ namespace HyperSlicer.Controllers
             }
 
             HelixFloorEnd = Instantiate(helixFloorEndPrefab, Vector3.up * lastHelixHeight, Quaternion.identity, transform);
-        }
-
-        private void OnDestroy()
-        {
-            GameManager.GameOver -= OnGameOver;
-            GameManager.LevelComplete -= OnLevelComplete;
-        }
-
-        private void OnGameOver()
-        {
-            Destroy(this);
-        }
-
-        private void OnLevelComplete()
-        {
-            Destroy(this);
         }
     }
 }

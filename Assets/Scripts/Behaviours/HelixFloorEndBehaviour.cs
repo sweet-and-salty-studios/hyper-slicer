@@ -31,7 +31,7 @@ namespace HyperSlicer.Behaviours
             GameManager.LevelComplete -= OnLevelComplete;
         }
 
-        private void OnLevelComplete()
+        private void OnLevelComplete(LevelInfo levelInfo)
         {
             Destroy(rotationBehaviour);
         }

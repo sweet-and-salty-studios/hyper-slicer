@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 namespace HyperSlicer.Managers
 {
@@ -14,6 +12,11 @@ namespace HyperSlicer.Managers
         private void OnDestroy()
         {
             GameManager.GameOver -= LoadCurrentScene;
+        }
+
+        private void LoadCurrentScene(LevelInfo levelInfo)
+        {
+            LoadCurrentScene();
         }
 
         public void LoadCurrentScene()

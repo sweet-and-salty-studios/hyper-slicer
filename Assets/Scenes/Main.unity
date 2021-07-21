@@ -1674,9 +1674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c36c18761898f449b0dc021f17ef50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelInfo:
-    helixCount: 10
-    helixDistance: 10
   sawController: {fileID: 1082495587}
   helixTowerController: {fileID: 1568757797}
 --- !u!1 &1264125898

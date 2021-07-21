@@ -13,17 +13,19 @@ namespace HyperSlicer.Managers
 
         private void Awake()
         {
+            GameManager.LevelLoaded += OnLevelLoaded;
             GameManager.GameOver += OnGameOver;
             GameManager.LevelComplete += OnLevelComplete;
-            GameManager.ScoreModified += OnScoreModified;
+            GameManager.ScoreAdded += OnScoreModified;
             GameManager.LevelProgressUpdated += OnLevelProgressUpdated;
         }
 
         private void OnDestroy()
         {
+            GameManager.LevelLoaded -= OnLevelLoaded;
             GameManager.GameOver -= OnGameOver;
             GameManager.LevelComplete -= OnLevelComplete;
-            GameManager.ScoreModified -= OnScoreModified;
+            GameManager.ScoreAdded -= OnScoreModified;
             GameManager.LevelProgressUpdated -= OnLevelProgressUpdated;
         }
 
@@ -34,19 +36,25 @@ namespace HyperSlicer.Managers
             if(action!= null) action.Invoke();
         }
 
-        private void OnGameOver()
+        private void OnLevelLoaded(LevelInfo levelInfo)
+        {
+            var currentLevelIndex = levelInfo.CurrentLevelIndex;
+            controlPanel.LevelProgressDisplay.UpdateLevelTexts(currentLevelIndex, currentLevelIndex + 1);
+        }
+
+        private void OnGameOver(LevelInfo levelInfo)
         {
             StartCoroutine(IDelayAction(() => gameOverPanel.gameObject.SetActive(true)));
         }
 
-        private void OnLevelComplete()
+        private void OnLevelComplete(LevelInfo levelInfo)
         {
             StartCoroutine(IDelayAction(() => levelCompletePanel.gameObject.SetActive(true)));
         }
 
-        private void OnScoreModified(int newScore)
+        private void OnScoreModified(LevelInfo levelInfo)
         {
-            controlPanel.ScoreDisplay.UpdateScoreText(newScore);
+            controlPanel.ScoreDisplay.UpdateScoreText(levelInfo.CurrentScore);
         }
 
         private void OnLevelProgressUpdated(float maxDistance, float currentDistance)

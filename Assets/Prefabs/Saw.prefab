@@ -310,9 +310,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80a9a5d52c8f9f449ef15a99188e095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossSectionMaterial: {fileID: 2100000, guid: 923553cf52fcc054ea9d5d7f4ca75c2e,
+  crossSectionMaterial: {fileID: 2100000, guid: f3537057a28ada744a5d3b4182a4b747,
     type: 2}
   rotationBehaviour: {fileID: 858525103}
+  collider: {fileID: 1279009877}
 --- !u!114 &5374880274235382254
 MonoBehaviour:
   m_ObjectHideFlags: 0
